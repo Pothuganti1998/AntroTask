@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JavaScript Functions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .function-box {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dynamic JavaScript Functions</h1>
+        
+        <div class="function-box">
+            <h3>Fibonacci Series</h3>
+            <input type="number" id="fibInput" placeholder="Enter a number">
+            <button onclick="calculateFibonacci()">Generate</button>
+            <div id="fibResult"></div>
+        </div>
+
+        <div class="function-box">
+            <h3>Palindrome Check</h3>
+            <input type="text" id="palindromeInput" placeholder="Enter a word or phrase">
+            <button onclick="checkPalindrome()">Check</button>
+            <div id="palindromeResult"></div>
+        </div>
+
+        <div class="function-box">
+            <h3>Prime Number Check</h3>
+            <input type="number" id="primeInput" placeholder="Enter a number">
+            <button onclick="checkPrime()">Check</button>
+            <div id="primeResult"></div>
+        </div>
+
+        <div class="function-box">
+            <h3>Vowel and Consonant Count</h3>
+            <input type="text" id="vcInput" placeholder="Enter a word or phrase">
+            <button onclick="countVC()">Count</button>
+            <div id="vcResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Fibonacci Series
+        const fibonacciSeries = (n) => {
+            let fibSeries = [0, 1];
+            for (let i = 2; i <= n; i++) {
+                fibSeries[i] = fibSeries[i - 1] + fibSeries[i - 2];
+            }
+            return fibSeries;
+        };
+
+        function calculateFibonacci() {
+            const n = document.getElementById('fibInput').value;
+            const result = fibonacciSeries(n);
+            document.getElementById('fibResult').innerText = `Fibonacci Series: ${result.join(', ')}`;
+        }
+
+        // Palindrome Check
+        const isPalindrome = (str) => {
+            let reversedStr = str.split("").reverse().join("");
+            return str.toLowerCase() === reversedStr.toLowerCase();
+        };
+
+        function checkPalindrome() {
+            const str = document.getElementById('palindromeInput').value;
+            const result = isPalindrome(str);
+            document.getElementById('palindromeResult').innerText = `Is Palindrome: ${result}`;
+        }
+
+        // Prime Number Check
+        const isPrime = (num) => {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        };
+
+        function checkPrime() {
+            const num = document.getElementById('primeInput').value;
+            const result = isPrime(parseInt(num));
+            document.getElementById('primeResult').innerText = `Is Prime: ${result}`;
+        }
+
+        // Vowel and Consonant Count
+        const countVowels = (str) => {
+            return (str.match(/[aeiou]/gi) || []).length;
+        };
+
+        const countConsonants = (str) => {
+            return (str.match(/[bcdfghjklmnpqrstvwxyz]/gi) || []).length;
+        };
+
+        function countVC() {
+            const str = document.getElementById('vcInput').value;
+            const vowels = countVowels(str);
+            const consonants = countConsonants(str);
+            document.getElementById('vcResult').innerText = `Vowels: ${vowels}, Consonants: ${consonants}`;
+        }
+    </script>
+</body>
+</html>
